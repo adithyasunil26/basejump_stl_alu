@@ -26,7 +26,7 @@ module bsg_alu #(
   logic [3:0][width_p-1:0] data_i;
   wire c; 
 
-  always_comb @(control)
+  always @(control)
   begin
     assign data_i = {res_add,res_and, res_xor, res_nand};
   end
@@ -38,8 +38,7 @@ module bsg_alu #(
   mux_n (
     .data_i(data_i),
     .sel_i(control),
-    .data_o(res),
-    .c_o(c)  
+    .data_o(res)
   );
 
 
@@ -49,7 +48,8 @@ module bsg_alu #(
     add_n (
       .a_i(a),
       .b_i(b),
-      .s_o(res_add)
+      .s_o(res_add),
+      .c_o(c)  
   );
 
   bsg_and #(
