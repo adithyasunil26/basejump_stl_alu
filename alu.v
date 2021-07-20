@@ -38,7 +38,7 @@ module bsg_alu #(
     .data_i(data_i),
     .sel_i(control),
     .data_o(res)
-  )
+  );
 
 
   bsg_adder_ripple_carry #(
