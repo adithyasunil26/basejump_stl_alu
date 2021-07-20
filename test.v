@@ -33,7 +33,6 @@ module test_bsg
   logic [width_p-1:0] a;
   logic [width_p-1:0] b;
   logic [width_p-1:0] res;
-  logic ov;
 
   logic finish_r;
 
@@ -64,7 +63,7 @@ module test_bsg
         $finish;
       end
     
-    $display("control:%b a: %b, b: %b, res: %b, ov: %b, finish_r: %b\n", control, a, b, res, ov, finish_r); 
+    $display("control:%b a: %b, b: %b, res: %b\n", control, a, b, res; 
 
   end
 
