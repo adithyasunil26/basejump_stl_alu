@@ -28,7 +28,7 @@ module bsg_alu #(
 
   always @(control)
   begin
-      assign data_i = {res_and, res_xor, res_nand, res_add};
+      assign data_i = {res_add, res_and, res_xor, res_nand};
   end
 
   bsg_mux #(
