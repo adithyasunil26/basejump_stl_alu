@@ -69,14 +69,12 @@ module test_bsg
   end
 
   bsg_alu #(
-    .width_p(width_p),
-    .harden_p(harden_p)
+    .width_p(width_p)
   ) dut (
     .control(control),
     .a(a),
     .b(b),
-    .res(res),
-    .ov(ov)
+    .res(res)
   );
 
 endmodule
