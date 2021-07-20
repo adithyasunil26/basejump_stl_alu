@@ -63,7 +63,7 @@ module test_bsg
         $finish;
       end
     
-    $display("control:%b a: %b, b: %b, res: %b\n", control, a, b, res; 
+    $display("control:%b a: %b, b: %b, res: %b\n", control, a, b, res); 
 
   end
 
