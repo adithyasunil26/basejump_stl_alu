@@ -1,6 +1,6 @@
 CAPI=2:
 
-name: ::bsg_alu:0-r1
+name: ::alu:0-r1
 description: simple N-bit ALU
 
 filesets:
@@ -35,7 +35,7 @@ targets:
     tools:
       verilator: 
         mode: lint-only
-    toplevel: bsg_alu
+    toplevel: alu
     parameters: 
       - width_p=4
   
@@ -45,7 +45,7 @@ targets:
     tools:
       verilator:
         verilator_options: [--Wno-lint]
-    toplevel: test_bsg
+    toplevel: test
     parameters: 
       - width_p=4
 
@@ -53,10 +53,6 @@ parameters:
   width_p:
     datatype : int
     default  : -1
-    paramtype: vlogparam
-  harden_p:
-    datatype : int
-    default  : 1
     paramtype: vlogparam
 
 provider :

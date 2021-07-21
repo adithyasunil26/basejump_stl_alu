@@ -12,24 +12,22 @@
 
 `include "bsg_defines.v"
 
-module bsg_alu #(
+module alu #(
     `BSG_INV_PARAM(width_p)
   )
   (
-    input [1:0] control,
-    input [width_p-1:0] a,
-    input [width_p-1:0] b,
-    output logic [width_p-1:0] res
+    input [1:0] sel_i,
+    input [width_p-1:0] a_i,
+    input [width_p-1:0] b_i,
+    output logic [width_p-1:0] res_o
   );
 
   logic [width_p-1:0] res_add,res_and, res_xor, res_nand;
   logic [3:0][width_p-1:0] data_i;
   wire c; 
 
-  always @(control)
-  begin
-      assign data_i = {res_add, res_nand, res_xor, res_and};
-  end
+  assign data_i = {res_add, res_nand, res_xor, res_and};
+
 
   bsg_mux #(
     .width_p(width_p),
@@ -37,8 +35,8 @@ module bsg_alu #(
   )
   mux_n (
     .data_i(data_i),
-    .sel_i(control),
-    .data_o(res)
+    .sel_i(sel_i),
+    .data_o(res_o)
   );
 
 
@@ -46,8 +44,8 @@ module bsg_alu #(
       .width_p(width_p)
     )
     add_n (
-      .a_i(a),
-      .b_i(b),
+      .a_i(a_i),
+      .b_i(b_i),
       .s_o(res_add),
       .c_o(c)  
   );
@@ -56,8 +54,8 @@ module bsg_alu #(
       .width_p(width_p)
     )
     and_n (
-      .a_i(a),
-      .b_i(b),
+      .a_i(a_i),
+      .b_i(b_i),
       .o(res_and)
   ); 
 
@@ -65,8 +63,8 @@ module bsg_alu #(
       .width_p(width_p)
     )
     xor_n (
-      .a_i(a),
-      .b_i(b),
+      .a_i(a_i),
+      .b_i(b_i),
       .o(res_xor)
   ); 
 
@@ -74,8 +72,8 @@ module bsg_alu #(
       .width_p(width_p)
     )
     nand_n (
-      .a_i(a),
-      .b_i(b),
+      .a_i(a_i),
+      .b_i(b_i),
       .o(res_nand)
   );
 

@@ -1,6 +1,6 @@
 `define WIDTH_P 4
 
-module test_bsg
+module test
 #(
   parameter width_p = `WIDTH_P,
   parameter harden_p = 0,
@@ -29,51 +29,50 @@ module test_bsg
                            , .async_reset_o(reset)
                           );
 
-  logic [1:0] control;
-  logic [width_p-1:0] a;
-  logic [width_p-1:0] b;
-  logic [width_p-1:0] res;
+  logic [1:0] sel_i;
+  logic [width_p-1:0] a_i;
+  logic [width_p-1:0] b_i;
+  logic [width_p-1:0] res_o;
 
   logic finish_r;
 
   initial begin
-  	control = 2'b00;
-		a=`WIDTH_P'd1;
-		b=`WIDTH_P'd3;
+  	sel_i = 2'b00;
+		a_i=`WIDTH_P'd1;
+		b_i=`WIDTH_P'd3;
 	end
 	
   always_ff @(posedge clk)
   begin
     if(reset)
       begin
-        a <= width_p'(1'b0);
-        b <= width_p'(1'b0);
+        a_i <= width_p'(1'b0);
+        b_i <= width_p'(1'b0);
         finish_r   <= 1'b0;
       end
     else
       begin  
-        control <= control+1;
+        sel_i <= sel_i+1;
       end
-          
-    if(&control)
+    
+    $display("sel_i:%b a_i: %b, b_i: %b, res_o: %b\n", sel_i, a_i, b_i, res_o); 
+     
+    if(&sel_i)
       finish_r <= 1'b1;
     if(finish_r)
       begin
         $display("===========================================================\n");
         $finish;
       end
-    
-    $display("control:%b a: %b, b: %b, res: %b\n", control, a, b, res); 
-
   end
 
-  bsg_alu #(
+  alu #(
     .width_p(width_p)
   ) dut (
-    .control(control),
-    .a(a),
-    .b(b),
-    .res(res)
+    .sel_i(sel_i),
+    .a_i(a_i),
+    .b_i(b_i),
+    .res_o(res_o)
   );
 
 endmodule
