@@ -14,7 +14,7 @@ fusesoc library add basejump https://github.com/adithyasunil26/basejump_stl_core
 ### Running the core
 For linting
 ```bash
-fusesoc run --target verilator_tb alu
+fusesoc run --target lint alu
 ```
 
 For verilator testbench
