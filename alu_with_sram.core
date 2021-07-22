@@ -1,0 +1,65 @@
+CAPI=2:
+
+name: ::alu_with_ram:0-r1
+description: simple N-bit ALU with SRAM
+
+filesets:
+  rtl:
+    files:
+      - bsg_defines.v: {is_include_file : true}
+    file_type: systemVerilogSource
+    depend:
+      - alu
+      - bsg_fakeram_gen
+  
+  tb:
+    files:
+      - test_wth_ram.v
+      - test.cpp : { file_type : cppSource }
+    file_type: systemVerilogSource
+    depend:
+      - bsg_nonsynth_dpi_clock_gen
+      - bsg_nonsynth_reset_gen
+
+targets:
+  default:
+    filesets: [rtl]
+  
+  lint:
+    default_tool: verilator
+    filesets: [rtl]
+    generate : [gen]
+    tools:
+      verilator: 
+        mode: lint-only
+    toplevel: alu
+    parameters: 
+      - width_p=4
+  
+  verilator_tb:
+    default_tool: verilator
+    filesets: [rtl, tb]
+    generate : [gen]
+    tools:
+      verilator:
+        verilator_options: [--Wno-lint]
+    toplevel: test
+    parameters: 
+      - width_p=4
+
+parameters:
+  width_p:
+    datatype : int
+    default  : -1
+    paramtype: vlogparam
+
+generate:
+  gen:
+    generator: bsg_fakeram_gen
+    parameters:
+      path_to_cfg: 'conf.cfg'
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : basejump_stl_alu
