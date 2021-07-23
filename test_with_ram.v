@@ -71,7 +71,7 @@ module test
         ce_in <= 1;
       end
     
-    $display("sel_i:%b a_i: %b, b_i: %b, res_o: %b\n", sel_i, a_i, b_i, res_o); 
+    $display("sel_i:%b a_i: %b, b_i: %b, res_o: %b\nrd_out:%b addr_in: %b, we_in: %b, wd_in: %b w_mask_in: %b \n", sel_i, a_i, b_i, res_o, rd_out, addr_in, we_in, wd_in, w_mask_in);
      
     if(&sel_i)
       finish_r <= 1'b1;
