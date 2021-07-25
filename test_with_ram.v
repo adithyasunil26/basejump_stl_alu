@@ -31,6 +31,7 @@ module test
   logic [width_p-1:0] res_o;
 
   logic finish_r;
+  logic r_r;
 
   logic [width_p-1:0]     rd_out;
   logic [width_p:0]       addr_in;
@@ -49,6 +50,7 @@ module test
     addr_in = 'd0;
     we_in = 0;
     wd_in = `WIDTH_P'd0;
+    r_r=0;
 	end
 	
   always_ff @(posedge clk)
@@ -63,12 +65,19 @@ module test
         wd_in <= `WIDTH_P'd0;
       end
     else
-      begin  
-        sel_i <= sel_i+1;
-        addr_in <= addr_in+1;
-        we_in <= 1;
-        wd_in <= res_o;
-        ce_in <= 1;
+      begin 
+        if(r_r) 
+          r_r=0;
+          addr_in <= addr_in;
+        else
+          begin
+            sel_i <= sel_i+1;
+            addr_in <= addr_in+1;
+            we_in <= 1;
+            wd_in <= res_o;
+            ce_in <= 1;
+            r_r=1;
+          end
       end
     
     $display("sel_i:%b a_i: %b, b_i: %b, res_o: %b\nrd_out:%b addr_in: %b, we_in: %b, wd_in: %b w_mask_in: %b \n", sel_i, a_i, b_i, res_o, rd_out, addr_in, we_in, wd_in, w_mask_in);
