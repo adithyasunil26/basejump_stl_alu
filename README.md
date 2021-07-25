@@ -11,7 +11,7 @@ Note: BaseJumpSTL core library must be present in order to run this core. Use fo
 fusesoc library add basejump https://github.com/adithyasunil26/basejump_stl_cores
 ```
 
-### Running the core
+### Running the ALU core
 For linting
 ```bash
 fusesoc run --target lint alu
@@ -21,3 +21,16 @@ For verilator testbench
 ```bash
 fusesoc run --target verilator_tb alu
 ```
+
+### Running the ALU core with sram
+For linting
+```bash
+fusesoc run --target lint alu_with_ram
+```
+
+For verilator testbench
+```bash
+fusesoc run --target verilator_tb alu_with_ram
+```
+
+
