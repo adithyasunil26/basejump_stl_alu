@@ -67,8 +67,10 @@ module test
     else
       begin 
         if(r_r) 
-          r_r=0;
-          addr_in <= addr_in;
+          begin
+            r_r=0;
+            addr_in <= addr_in;
+          end
         else
           begin
             sel_i <= sel_i+1;
