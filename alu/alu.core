@@ -44,7 +44,7 @@ targets:
     filesets: [rtl, tb]
     tools:
       verilator:
-        verilator_options: [--Wno-lint]
+        verilator_options: [--Wno-lint -Wno-TIMESCALEMOD]
     toplevel: test
     parameters: 
       - width_p=4
