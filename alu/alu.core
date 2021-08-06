@@ -1,25 +1,28 @@
 CAPI=2:
 
-name: ::alu_with_ram:0-r1
-description: simple N-bit ALU with SRAM
+name: ::alu:0-r1
+description: simple N-bit ALU
 
 filesets:
   rtl:
     files:
       - bsg_defines.v: {is_include_file : true}
+      - alu.v
     file_type: systemVerilogSource
     depend:
-      - alu
-      - bsg_fakeram
+      - bsg_mux
+      - bsg_and
+      - bsg_nand
+      - bsg_adder_ripple_carry
+      - bsg_xor
   
   tb:
     files:
-      - test_with_ram.v
+      - alu/test.v
       - test.cpp : { file_type : cppSource }
     file_type: systemVerilogSource
     depend:
       - bsg_nonsynth_dpi_clock_gen
-      - bsg_nonsynth_clock_gen
       - bsg_nonsynth_reset_gen
 
 targets:
@@ -29,7 +32,6 @@ targets:
   lint:
     default_tool: verilator
     filesets: [rtl]
-    generate : [gen]
     tools:
       verilator: 
         mode: lint-only
@@ -40,7 +42,6 @@ targets:
   verilator_tb:
     default_tool: verilator
     filesets: [rtl, tb]
-    generate : [gen]
     tools:
       verilator:
         verilator_options: [--Wno-lint -Wno-TIMESCALEMOD]
@@ -48,17 +49,22 @@ targets:
     parameters: 
       - width_p=4
 
+  synth:
+    default_tool: yosys
+    filesets: [rtl]
+    tools:
+      yosys:
+        arch: ice40
+        output_format: json
+        yosys_synth_options: [-sv]
+    toplevel: alu
+
+
 parameters:
   width_p:
     datatype : int
     default  : -1
     paramtype: vlogparam
-
-generate:
-  gen:
-    generator: bsg_fakeram_gen
-    parameters:
-      path_to_cfg: 'conf.cfg'
 
 provider :
   name : github
