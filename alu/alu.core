@@ -59,7 +59,6 @@ targets:
         yosys_synth_options: [-sv]
     toplevel: alu
 
-
 parameters:
   width_p:
     datatype : int
