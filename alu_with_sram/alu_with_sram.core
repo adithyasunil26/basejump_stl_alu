@@ -43,7 +43,7 @@ targets:
     generate : [gen]
     tools:
       verilator:
-        verilator_options: [--Wno-lint -Wno-TIMESCALEMOD]
+        verilator_options: [--Wno-lint -Wno-TIMESCALEMOD -Wno-MODDUP]
     toplevel: test
     parameters: 
       - width_p=4
