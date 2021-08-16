@@ -49,6 +49,16 @@ targets:
     parameters: 
       - width_p=4
 
+  synth:
+    default_tool: yosys
+    filesets: [rtl]
+    tools:
+      yosys:
+        arch: ice40
+        output_format: json
+        yosys_synth_options: [-sv]
+    toplevel: alu
+
 parameters:
   width_p:
     datatype : int
