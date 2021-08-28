@@ -44,11 +44,9 @@ Before running the fusesoc run commands, open the core file present in your fuse
 1. Navigate to the core file using:
 ```bash
 cd fusesoc_libraries/alu/alu_with_sram/
-pwd
 ```
-2. Copy the output.
-3. Open the `alu_with_sram.core` file and change `path_to_cfg` to path of config file you wish to use
-4. Return to original directory with 
+2. Open the `alu_with_sram.core` file and change `path_to_cfg` to path of config file you wish to use
+3. Return to original directory with 
 ```bash
 cd ../../..
 ```
