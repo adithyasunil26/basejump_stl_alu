@@ -29,22 +29,6 @@ fusesoc run --target verilator_tb alu
 
 ### Running the ALU core with sram
 
-Before running the following lines of code open the core file present in your fusesoc_libraries directory which will be created on executing the `lirary add` command and edit the `path_to_cfg` value to match the path to the mentioned file in your file system.
-
-1. To use the default config file given follow these steps:
-```bash
-cd fusesoc_libraries/alu/alu_with_sram/
-pwd
-```
-2. Copy the output.
-3. Open the `alu_with_sram.core` file and change `path_to_cfg` to `<copied_path>/conf.cfg`
-4. Return to original directory with 
-```bash
-cd ../../..
-```
-Now you can use the core with the following targets.
-
-
 For linting
 ```bash
 fusesoc run --target lint alu_with_ram
@@ -54,5 +38,17 @@ For verilator testbench
 ```bash
 fusesoc run --target verilator_tb alu_with_ram
 ```
+### To use a custom config file for the fakeram
+Before running the fusesoc run commands, open the core file present in your fusesoc_libraries directory which will be created on executing the `library add` command and edit the `path_to_cfg` value to match the path to the mentioned file in your file system.
 
+1. Navigate to the core file using:
+```bash
+cd fusesoc_libraries/alu/alu_with_sram/
+```
+2. Open the `alu_with_sram.core` file and change `path_to_cfg` to path of config file you wish to use
+3. Return to original directory with 
+```bash
+cd ../../..
+```
+Now you can use the core with the commands mentioned above.
 
