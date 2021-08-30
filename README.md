@@ -39,7 +39,7 @@ For verilator testbench
 fusesoc run --target verilator_tb alu_with_ram
 ```
 ### To use a custom config file for the fakeram
-Before running the fusesoc run commands, open the core file present in your fusesoc_libraries directory which will be created on executing the `lirary add` command and edit the `path_to_cfg` value to match the path to the mentioned file in your file system.
+Before running the fusesoc run commands, open the core file present in your fusesoc_libraries directory which will be created on executing the `library add` command and edit the `path_to_cfg` value to match the path to the mentioned file in your file system.
 
 1. Navigate to the core file using:
 ```bash
