@@ -58,7 +58,7 @@ generate:
   gen:
     generator: bsg_fakeram_gen
     parameters:
-      path_to_cfg: '../../alu_0-r1/alu_with_sram/conf.cfg'
+      path_to_cfg: '../alu_with_ram_0-r1/alu_with_sram/conf.cfg'
 
 provider :
   name : github
